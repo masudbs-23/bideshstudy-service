@@ -113,7 +113,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"john@example.com\"\n}"
+							"raw": "{\n  \"email\": \"john@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:5000/api/auth/forgot-password",
@@ -121,7 +126,8 @@
 							"host": ["localhost"],
 							"port": "5000",
 							"path": ["api", "auth", "forgot-password"]
-						}
+						},
+						"description": "Sends a 6-digit OTP code to the user's email for password reset. Use this OTP in the Reset Password endpoint."
 					}
 				},
 				{
@@ -136,7 +142,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"john@example.com\",\n  \"otp\": \"123456\",\n  \"password\": \"newpassword123\"\n}"
+							"raw": "{\n  \"email\": \"john@example.com\",\n  \"otp\": \"123456\",\n  \"password\": \"newpassword123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:5000/api/auth/reset-password",
@@ -144,7 +155,8 @@
 							"host": ["localhost"],
 							"port": "5000",
 							"path": ["api", "auth", "reset-password"]
-						}
+						},
+						"description": "Resets the password using the OTP code received via email. Requires: email, OTP (6-digit code from email), and new password. OTP expires in 10 minutes."
 					}
 				}
 			]
