@@ -228,7 +228,7 @@ exports.refreshToken = async (req, res, next) => {
 };
 
 /**
- * Forgot password
+ * Forgot password - Send OTP
  */
 exports.forgotPassword = async (req, res, next) => {
   try {
@@ -243,16 +243,17 @@ exports.forgotPassword = async (req, res, next) => {
       });
     }
 
-    // Generate reset token
-    const resetToken = generateResetToken();
-    user.resetPasswordToken = resetToken;
-    user.resetPasswordExpire = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
-    await user.save();
+    // Generate and save OTP
+    const otp = generateOTP();
+    await OTP.create({
+      email: user.email,
+      otp,
+      type: 'password_reset',
+    });
 
-    // Send reset email
-    const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+    // Send OTP email
     try {
-      await sendEmail(user.email, 'passwordReset', [resetLink, user.name]);
+      await sendEmail(user.email, 'passwordResetOTP', [otp, user.name]);
     } catch (emailError) {
       console.error('Email sending failed:', emailError);
     }
@@ -267,39 +268,43 @@ exports.forgotPassword = async (req, res, next) => {
 };
 
 /**
- * Reset password
+ * Reset password - Using OTP
  */
 exports.resetPassword = async (req, res, next) => {
   try {
-    const { token, password } = req.body;
+    const { email, otp, password } = req.body;
 
-    const jwt = require('jsonwebtoken');
-    let decoded;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (error) {
-      return res.status(STATUS_CODE.BAD_REQUEST).json({
-        success: false,
-        message: ERROR_MESSAGES.PASSWORD_RESET_TOKEN_INVALID,
-      });
-    }
-
-    const user = await User.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpire: { $gt: new Date() },
+    // Verify OTP
+    const otpRecord = await OTP.findOne({
+      email,
+      otp,
+      type: 'password_reset',
+      isUsed: false,
+      expiresAt: { $gt: new Date() },
     });
 
-    if (!user) {
+    if (!otpRecord) {
       return res.status(STATUS_CODE.BAD_REQUEST).json({
         success: false,
-        message: ERROR_MESSAGES.PASSWORD_RESET_TOKEN_INVALID,
+        message: ERROR_MESSAGES.INVALID_OTP,
       });
     }
+
+    // Find user
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(STATUS_CODE.NOT_FOUND).json({
+        success: false,
+        message: ERROR_MESSAGES.USER_NOT_FOUND,
+      });
+    }
+
+    // Mark OTP as used
+    otpRecord.isUsed = true;
+    await otpRecord.save();
 
     // Update password
     user.password = password;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpire = undefined;
     await user.save();
 
     res.status(STATUS_CODE.OK).json({
@@ -310,4 +315,5 @@ exports.resetPassword = async (req, res, next) => {
     next(error);
   }
 };
+
 

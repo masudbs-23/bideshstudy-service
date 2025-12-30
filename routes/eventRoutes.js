@@ -19,3 +19,4 @@ router.delete('/:id', authenticate, authorizeAdmin, eventController.deleteEvent)
 
 module.exports = router;
 
+

@@ -18,3 +18,4 @@ router.put('/update-education', validate(updateEducationSchema), studentControll
 
 module.exports = router;
 
+

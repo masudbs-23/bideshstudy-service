@@ -136,7 +136,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"token\": \"reset-token-from-email\",\n  \"password\": \"newpassword123\"\n}"
+							"raw": "{\n  \"email\": \"john@example.com\",\n  \"otp\": \"123456\",\n  \"password\": \"newpassword123\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:5000/api/auth/reset-password",
@@ -1144,4 +1144,5 @@
 		}
 	]
 }
+
 

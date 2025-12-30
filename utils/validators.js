@@ -28,7 +28,8 @@ const forgotPasswordSchema = Joi.object({
 });
 
 const resetPasswordSchema = Joi.object({
-  token: Joi.string().required(),
+  email: Joi.string().email().required(),
+  otp: Joi.string().length(6).required(),
   password: Joi.string().min(8).required(),
 });
 
@@ -199,4 +200,5 @@ module.exports = {
   sendMessageSchema,
   validate,
 };
+
 

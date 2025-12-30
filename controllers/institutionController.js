@@ -215,3 +215,4 @@ exports.searchInstitutions = async (req, res, next) => {
   }
 };
 
+

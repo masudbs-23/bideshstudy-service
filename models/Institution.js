@@ -86,3 +86,4 @@ institutionSchema.index({ name: 'text', description: 'text', country: 'text' });
 
 module.exports = mongoose.model('Institution', institutionSchema);
 
+

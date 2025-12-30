@@ -34,3 +34,4 @@ eventBookingSchema.index({ event: 1, student: 1 }, { unique: true }); // Prevent
 
 module.exports = mongoose.model('EventBooking', eventBookingSchema);
 
+

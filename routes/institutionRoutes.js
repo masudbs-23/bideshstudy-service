@@ -16,3 +16,4 @@ router.delete('/:id', authenticate, authorizeAdmin, institutionController.delete
 
 module.exports = router;
 
+

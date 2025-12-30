@@ -63,7 +63,7 @@ const emailTemplates = {
   }),
 
   passwordReset: (resetLink, name) => ({
-    subject: 'Reset Your Password - Bidesh Study',
+    subject: 'Reset Your Password - Education Consultancy Platform',
     html: `
       <!DOCTYPE html>
       <html>
@@ -91,7 +91,47 @@ const emailTemplates = {
             <p>If you didn't request this, please ignore this email.</p>
           </div>
           <div class="footer">
-            <p>&copy; ${new Date().getFullYear()} Bidesh Study. All rights reserved.</p>
+            <p>&copy; ${new Date().getFullYear()} Education Consultancy Platform. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+  }),
+
+  passwordResetOTP: (otp, name) => ({
+    subject: 'Password Reset OTP - Education Consultancy Platform',
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: #4CAF50; color: white; padding: 20px; text-align: center; }
+          .content { padding: 20px; background: #f9f9f9; }
+          .otp-box { background: #fff; border: 2px dashed #4CAF50; padding: 20px; text-align: center; margin: 20px 0; }
+          .otp-code { font-size: 32px; font-weight: bold; color: #4CAF50; letter-spacing: 5px; }
+          .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>Password Reset OTP</h1>
+          </div>
+          <div class="content">
+            <h2>Hello ${name || 'User'},</h2>
+            <p>You requested to reset your password. Please use the following OTP to reset your password:</p>
+            <div class="otp-box">
+              <div class="otp-code">${otp}</div>
+            </div>
+            <p>This OTP will expire in 10 minutes.</p>
+            <p>If you didn't request this, please ignore this email.</p>
+          </div>
+          <div class="footer">
+            <p>&copy; ${new Date().getFullYear()} Education Consultancy Platform. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -159,4 +199,5 @@ module.exports = {
   sendEmail,
   emailTemplates,
 };
+
 

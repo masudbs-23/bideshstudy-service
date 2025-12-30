@@ -39,3 +39,4 @@ otpSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 }); // Auto-delete exp
 
 module.exports = mongoose.model('OTP', otpSchema);
 
+

@@ -50,3 +50,4 @@ eventSchema.index({ title: 'text', description: 'text', location: 'text' }); // 
 
 module.exports = mongoose.model('Event', eventSchema);
 
+

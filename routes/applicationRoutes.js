@@ -15,3 +15,4 @@ router.get('/', authenticate, authorizeAdmin, applicationController.getAllApplic
 
 module.exports = router;
 
+
