@@ -23,7 +23,7 @@ transporter.verify(function (error, success) {
 // Email templates
 const emailTemplates = {
   otpVerification: (otp, name) => ({
-    subject: 'Verify Your Email - Education Consultancy Platform',
+    subject: 'Verify Your Email - Bidesh Study',
     html: `
       <!DOCTYPE html>
       <html>
@@ -42,7 +42,7 @@ const emailTemplates = {
       <body>
         <div class="container">
           <div class="header">
-            <h1>Education Consultancy Platform</h1>
+            <h1>Bidesh Study</h1>
           </div>
           <div class="content">
             <h2>Hello ${name || 'User'},</h2>
@@ -54,7 +54,7 @@ const emailTemplates = {
             <p>If you didn't request this, please ignore this email.</p>
           </div>
           <div class="footer">
-            <p>&copy; ${new Date().getFullYear()} Education Consultancy Platform. All rights reserved.</p>
+            <p>&copy; ${new Date().getFullYear()} Bidesh Study. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -63,7 +63,7 @@ const emailTemplates = {
   }),
 
   passwordReset: (resetLink, name) => ({
-    subject: 'Reset Your Password - Education Consultancy Platform',
+    subject: 'Reset Your Password - Bidesh Study',
     html: `
       <!DOCTYPE html>
       <html>
@@ -91,7 +91,7 @@ const emailTemplates = {
             <p>If you didn't request this, please ignore this email.</p>
           </div>
           <div class="footer">
-            <p>&copy; ${new Date().getFullYear()} Education Consultancy Platform. All rights reserved.</p>
+            <p>&copy; ${new Date().getFullYear()} Bidesh Study. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -129,7 +129,7 @@ const emailTemplates = {
             <p>Please log in to your account to view more details.</p>
           </div>
           <div class="footer">
-            <p>&copy; ${new Date().getFullYear()} Education Consultancy Platform. All rights reserved.</p>
+            <p>&copy; ${new Date().getFullYear()} Bidesh Study. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -143,7 +143,7 @@ const sendEmail = async (to, template, data) => {
   try {
     const emailContent = emailTemplates[template](...data);
     const info = await transporter.sendMail({
-      from: `"Education Consultancy Platform" <${process.env.SMTP_USER}>`,
+      from: `"Bidesh Study" <${process.env.SMTP_USER}>`,
       to,
       subject: emailContent.subject,
       html: emailContent.html,
