@@ -1,0 +1,1147 @@
+{
+	"info": {
+		"_postman_id": "admission-service-api",
+		"name": "Admission Service API",
+		"description": "Complete API collection for Education Consultancy Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"mobile\": \"1234567890\",\n  \"password\": \"password123\",\n  \"role\": \"student\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/register",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john@example.com\",\n  \"otp\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/verify-otp",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "auth", "verify-otp"]
+						}
+					}
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refreshToken\": \"your-refresh-token-here\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/refresh-token",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "auth", "refresh-token"]
+						}
+					}
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john@example.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/forgot-password",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "auth", "forgot-password"]
+						}
+					}
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"token\": \"reset-token-from-email\",\n  \"password\": \"newpassword123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/reset-password",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "auth", "reset-password"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/students/profile",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "students", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe Updated\",\n  \"mobile\": \"9876543210\",\n  \"dateOfBirth\": \"1995-01-01\",\n  \"address\": \"123 Main Street\",\n  \"city\": \"Dhaka\",\n  \"country\": \"Bangladesh\",\n  \"zipCode\": \"1200\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/students/profile",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "students", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Upload Document",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "type",
+									"value": "ssc_certificate",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "SSC Certificate",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Secondary School Certificate",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/students/upload-documents",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "students", "upload-documents"]
+						}
+					}
+				},
+				{
+					"name": "Get Documents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/students/documents?type=ssc_certificate",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "students", "documents"],
+							"query": [
+								{
+									"key": "type",
+									"value": "ssc_certificate"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Document",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/students/documents/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "students", "documents", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "document-id-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Education",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"education\": {\n    \"ssc\": {\n      \"school\": \"ABC High School\",\n      \"board\": \"Dhaka\",\n      \"year\": 2015,\n      \"gpa\": 4.5\n    },\n    \"hsc\": {\n      \"school\": \"XYZ College\",\n      \"board\": \"Dhaka\",\n      \"year\": 2017,\n      \"gpa\": 4.8\n    },\n    \"ielts\": {\n      \"overall\": 7.5,\n      \"listening\": 8.0,\n      \"reading\": 7.5,\n      \"writing\": 7.0,\n      \"speaking\": 7.5,\n      \"testDate\": \"2023-01-15\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/students/update-education",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "students", "update-education"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Institutions",
+			"item": [
+				{
+					"name": "Get All Institutions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/institutions?page=1&limit=10&country=USA&city=New York",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "institutions"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "country",
+									"value": "USA"
+								},
+								{
+									"key": "city",
+									"value": "New York"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Institution by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/institutions/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "institutions", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "institution-id-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Institutions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/institutions/search?q=university&country=USA&page=1&limit=10",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "institutions", "search"],
+							"query": [
+								{
+									"key": "q",
+									"value": "university"
+								},
+								{
+									"key": "country",
+									"value": "USA"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Institution (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Harvard University\",\n  \"description\": \"One of the most prestigious universities in the world\",\n  \"country\": \"USA\",\n  \"city\": \"Cambridge\",\n  \"courses\": [\n    {\n      \"name\": \"Computer Science\",\n      \"duration\": \"4 years\",\n      \"fees\": 50000,\n      \"intakeDates\": [\"Fall 2024\", \"Spring 2025\"],\n      \"requirements\": \"High school diploma, SAT scores\"\n    }\n  ],\n  \"images\": [\"https://example.com/image1.jpg\"],\n  \"website\": \"https://www.harvard.edu\",\n  \"contactEmail\": \"admissions@harvard.edu\",\n  \"contactPhone\": \"+1-617-495-1000\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/institutions",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "institutions"]
+						}
+					}
+				},
+				{
+					"name": "Update Institution (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Harvard University Updated\",\n  \"description\": \"Updated description\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/institutions/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "institutions", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "institution-id-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Institution (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/institutions/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "institutions", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "institution-id-here"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Applications",
+			"item": [
+				{
+					"name": "Apply to Institution",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"institutionId\": \"institution-id-here\",\n  \"courseName\": \"Computer Science\",\n  \"intakeDate\": \"Fall 2024\",\n  \"documents\": [\"document-id-1\", \"document-id-2\"],\n  \"notes\": \"I am very interested in this program\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/applications/apply",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "applications", "apply"]
+						}
+					}
+				},
+				{
+					"name": "Get My Applications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/applications/my-applications?page=1&limit=10&status=pending",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "applications", "my-applications"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "pending"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Application by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/applications/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "applications", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "application-id-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Application Status (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"accepted\",\n  \"notes\": \"Application approved. Welcome!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/applications/:id/status",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "applications", ":id", "status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "application-id-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Applications (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/applications?page=1&limit=10&status=pending&institutionId=inst-id&studentId=student-id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "applications"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "pending"
+								},
+								{
+									"key": "institutionId",
+									"value": "inst-id"
+								},
+								{
+									"key": "studentId",
+									"value": "student-id"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Get All Events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/events?page=1&limit=10&date=upcoming&location=Dhaka",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "events"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "date",
+									"value": "upcoming"
+								},
+								{
+									"key": "location",
+									"value": "Dhaka"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Event by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/events/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "events", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "event-id-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Book Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"notes\": \"Looking forward to attending\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/events/:id/book",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "events", ":id", "book"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "event-id-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get My Bookings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/events/my-bookings?page=1&limit=10",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "events", "my-bookings"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Event (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Study Abroad Fair 2024\",\n  \"description\": \"Join us for an informative session about studying abroad\",\n  \"date\": \"2024-06-15T10:00:00Z\",\n  \"location\": \"Dhaka Convention Center\",\n  \"image\": \"https://example.com/event-image.jpg\",\n  \"maxParticipants\": 100\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/events",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "events"]
+						}
+					}
+				},
+				{
+					"name": "Update Event (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Study Abroad Fair 2024 - Updated\",\n  \"maxParticipants\": 150\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/events/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "events", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "event-id-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Event (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/events/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "events", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "event-id-here"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Get Conversations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/chat/conversations",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "chat", "conversations"]
+						}
+					}
+				},
+				{
+					"name": "Get Messages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/chat/messages/:conversationId?page=1&limit=50",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "chat", "messages", ":conversationId"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							],
+							"variable": [
+								{
+									"key": "conversationId",
+									"value": "conversation-id-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer your-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"conversationId\": \"conversation-id-here\",\n  \"message\": \"Hello, I need help with my application\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/chat/send",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "chat", "send"]
+						}
+					}
+				},
+				{
+					"name": "Get Admin Conversations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/chat/admin/conversations",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "chat", "admin", "conversations"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get Dashboard Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/dashboard/stats",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "admin", "dashboard", "stats"]
+						}
+					}
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/users?page=1&limit=10&role=student&isVerified=true&search=john",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "admin", "users"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "role",
+									"value": "student"
+								},
+								{
+									"key": "isVerified",
+									"value": "true"
+								},
+								{
+									"key": "search",
+									"value": "john"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update User Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"isVerified\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/admin/users/:id/status",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "admin", "users", ":id", "status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "user-id-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Applications (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/applications?page=1&limit=10&status=pending",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "admin", "applications"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "pending"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Analytics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer admin-access-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/analytics?startDate=2024-01-01&endDate=2024-12-31",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "admin", "analytics"],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2024-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-12-31"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/health",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "5000",
+					"path": ["health"]
+				}
+			}
+		}
+	]
+}
+
