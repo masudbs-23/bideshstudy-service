@@ -9,12 +9,10 @@ const { sendEmail } = require('../config/email');
  */
 exports.register = async (req, res, next) => {
   try {
-    const { name, email, mobile, password, role } = req.body;
+    const { email, password, role } = req.body;
 
     // Check if user already exists
-    const existingUser = await User.findOne({
-      $or: [{ email }, { mobile }],
-    });
+    const existingUser = await User.findOne({ email });
 
     if (existingUser) {
       return res.status(STATUS_CODE.CONFLICT).json({
@@ -25,9 +23,7 @@ exports.register = async (req, res, next) => {
 
     // Create user
     const user = await User.create({
-      name,
       email,
-      mobile,
       password,
       role: role || 'student',
     });
@@ -42,7 +38,7 @@ exports.register = async (req, res, next) => {
 
     // Send OTP email
     try {
-      await sendEmail(user.email, 'otpVerification', [otp, user.name]);
+      await sendEmail(user.email, 'otpVerification', [otp, user.name || 'User']);
     } catch (emailError) {
       console.error('Email sending failed:', emailError);
       // Continue even if email fails
@@ -253,7 +249,7 @@ exports.forgotPassword = async (req, res, next) => {
 
     // Send OTP email
     try {
-      await sendEmail(user.email, 'passwordResetOTP', [otp, user.name]);
+      await sendEmail(user.email, 'passwordResetOTP', [otp, user.name || 'User']);
     } catch (emailError) {
       console.error('Email sending failed:', emailError);
     }

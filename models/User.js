@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, 'Name is required'],
       trim: true,
       maxlength: [50, 'Name cannot exceed 50 characters'],
     },
@@ -19,8 +18,8 @@ const userSchema = new mongoose.Schema(
     },
     mobile: {
       type: String,
-      required: [true, 'Mobile number is required'],
       unique: true,
+      sparse: true,
       trim: true,
       match: [/^[0-9]{10,15}$/, 'Please provide a valid mobile number'],
     },

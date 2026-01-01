@@ -6,9 +6,7 @@ const Joi = require('joi');
 
 // Auth validators
 const registerSchema = Joi.object({
-  name: Joi.string().min(2).max(50).required(),
   email: Joi.string().email().required(),
-  mobile: Joi.string().pattern(/^[0-9]{10,15}$/).required(),
   password: Joi.string().min(8).required(),
   role: Joi.string().valid('student', 'admin').default('student'),
 });
