@@ -58,6 +58,62 @@ exports.register = async (req, res, next) => {
 };
 
 /**
+ * Resend OTP
+ */
+exports.resendOTP = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    // Check if user exists
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(STATUS_CODE.NOT_FOUND).json({
+        success: false,
+        message: ERROR_MESSAGES.USER_NOT_FOUND,
+      });
+    }
+
+    // Check if user is already verified
+    if (user.isVerified) {
+      return res.status(STATUS_CODE.BAD_REQUEST).json({
+        success: false,
+        message: 'User is already verified.',
+      });
+    }
+
+    // Generate and save new OTP
+    const otp = generateOTP();
+    await OTP.create({
+      email: user.email,
+      otp,
+      type: 'verification',
+    });
+
+    // Send OTP email
+    try {
+      await sendEmail(user.email, 'otpVerification', [otp, user.name || 'User']);
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError);
+      return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: 'Failed to send OTP email. Please try again later.',
+      });
+    }
+
+    res.status(STATUS_CODE.OK).json({
+      success: true,
+      message: SUCCESS_MESSAGES.OTP_RESENT,
+      data: {
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
  * Verify OTP
  */
 exports.verifyOTP = async (req, res, next) => {

@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
-const { validate, registerSchema, loginSchema, verifyOtpSchema, forgotPasswordSchema, resetPasswordSchema } = require('../utils/validators');
+const { validate, registerSchema, loginSchema, verifyOtpSchema, resendOtpSchema, forgotPasswordSchema, resetPasswordSchema } = require('../utils/validators');
 const { authLimiter, otpLimiter } = require('../middleware/rateLimiter');
 
 // Public routes
 router.post('/register', authLimiter, validate(registerSchema), authController.register);
 router.post('/verify-otp', otpLimiter, validate(verifyOtpSchema), authController.verifyOTP);
+router.post('/resend-otp', otpLimiter, validate(resendOtpSchema), authController.resendOTP);
 router.post('/login', authLimiter, validate(loginSchema), authController.login);
 router.post('/refresh-token', authController.refreshToken);
 router.post('/forgot-password', authLimiter, validate(forgotPasswordSchema), authController.forgotPassword);

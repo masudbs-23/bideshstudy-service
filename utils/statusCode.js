@@ -30,6 +30,7 @@ const STATUS_CODE = {
 const SUCCESS_MESSAGES = {
   REGISTER_SUCCESS: "Registration successful. Please verify your OTP.",
   OTP_VERIFIED: "OTP verified successfully.",
+  OTP_RESENT: "OTP has been resent to your email.",
   LOGIN_SUCCESS: "Login successful.",
   LOGOUT_SUCCESS: "Logout successful.",
   PASSWORD_RESET_SENT: "Password reset link sent to your email.",
