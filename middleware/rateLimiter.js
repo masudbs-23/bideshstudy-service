@@ -32,14 +32,22 @@ const apiLimiter = rateLimit({
  * Rate limiter for OTP requests
  */
 const otpLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 1, // 1 request per minute
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 10, // 10 requests per 10 minutes
   message: {
     success: false,
-    message: 'Please wait before requesting another OTP.',
+    message: 'Too many OTP requests. Please wait for 10 minutes before requesting another OTP.',
   },
   standardHeaders: true,
   legacyHeaders: false,
+  handler: (req, res, next, options) => {
+    const retryAfter = Math.ceil((options.resetTime - Date.now()) / 1000); // seconds until reset
+    const minutes = Math.ceil(retryAfter / 60);
+    res.status(options.statusCode).json({
+      success: false,
+      message: `Too many OTP requests. Please wait for ${minutes} minute${minutes > 1 ? 's' : ''} before requesting another OTP.`,
+    });
+  },
 });
 
 module.exports = {

@@ -11,6 +11,24 @@ const compression = require('compression');
 // Load environment variables
 dotenv.config();
 
+// Validate required environment variables
+const requiredEnvVars = [
+  'MONGODB_URI',
+  'JWT_SECRET',
+  'JWT_REFRESH_SECRET',
+];
+
+const missingEnvVars = requiredEnvVars.filter((varName) => !process.env[varName]);
+
+if (missingEnvVars.length > 0) {
+  console.error('❌ Missing required environment variables:');
+  missingEnvVars.forEach((varName) => {
+    console.error(`   - ${varName}`);
+  });
+  console.error('\n💡 Please create a .env file based on .env.example and fill in all required values.');
+  process.exit(1);
+}
+
 // Import configurations
 const connectDB = require('./config/database');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
